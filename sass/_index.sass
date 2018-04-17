@@ -1,3 +1,13 @@
+@keyframes updownAni 
+	0%
+		margin-bottom: 10px
+	50%
+		margin-bottom: 0
+	100% 
+		margin-bottom: 10px
+
+=animationUpDown
+	+animation(updownAni 1s infinite)
 
 html,body 
 	width: 100%
@@ -11,7 +21,7 @@ html,body
 	top: 0
 	left: 0
 
-
+ 
 .bigContainer 
 
 	+fullPage
@@ -19,9 +29,35 @@ html,body
 	left: 50%
 	margin-left: -320px	
 	overflow: auto
-	.container
+	.container 
+		+bgi('bg1.jpg')
+		+coverBg 
 		+fullPage
 		+dTime
+		.footer
+			position: absolute
+			width: 100%
+			bottom: 0
+			height: 80px
+			background-color: white
+			z-index: 0
+			&:after 
+				content: ''
+				+bg('bg2.jpg')
+				position: absolute
+				bottom: 80px
+				right: 0
+				+opacity(1)
+				+dTime
+
+			// z-index: 3
+			.logo
+				+bg('logo.png')
+				height: 28px
+				position: absolute
+				right: 30px
+				top: 28px
+		
 		&.bigSize 
 			+scale(1.7)
 			+transform-origin(0,0) 
@@ -40,8 +76,7 @@ html,body
 			z-index: 5
 		// page common style init
 		.page 
-			+coverBg 
-			+bgi('bg.jpg')
+			
 			+divGoVerticalCenter_forMom
 			+fullPage
 			display: none
@@ -58,15 +93,12 @@ html,body
 					&:first-child
 						position: relative
 		.pageArr
-			background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNyA0NCI+PHBhdGggZD0iTTI3IDIydjBMNSA0NGwtMi4xLTIuMUwyMi44IDIyIDIuOSAyLjEgNSAwIDI3IDIydjB6IiBmaWxsPSIjZmZmIi8+PC9zdmc+)
+			+bg('arr.png')
 			position: absolute
 			bottom: 15px
 			left: 50%
 			margin-left: -30px 
-			width: 27px
-			height: 44px
-			+rotate(90deg)
-
+			+animationUpDown
 
 		
 		@for $i from 1 through 7
@@ -75,7 +107,7 @@ html,body
 				.wrap
 					@for $j from 1 through 10 
 						> .content:nth-child(#{$j})
-							+bg('p#{$i}_#{$j}.png')
+							+bg('p#{$i}.png')
 
 			// channel
 			&.channel_#{$i}	
@@ -135,23 +167,53 @@ html,body
 
 
 // costom rule
-.bigContainer 
-	
-	.container
-		
-		.page.p1  
-			+bgi('bg1.jpg')
-		.page.p4 
-			.calendarBtn
-				position: absolute
-				width: 220px
-				height: 140px
-				top: 40px	
-				left: 40px
 
-		.imintBtn
-			position: absolute
-			width: 160px
-			height: 140px
-			top: 540px
-			left: 60px
+=btn 
+	position: absolute
+	width: 200px
+	height: 90px
+	left: -10px
+	// border: 1px solid #000
+
+.bigContainer 
+	.container
+		&.channel_1
+			+bgi('bg.jpg')
+			.page 
+				.wrap
+					text-align-last: left
+			.footer 
+				&:after 
+					+opacity(0)
+		.page.p1
+			text-align: left
+			padding-bottom: 220px
+		.page.p2 
+			.calendarBtn
+				+btn
+				top: 650px	
+
+		.page.p3
+			.calendarBtn
+				+btn
+				top: 636px
+			.youtubeBtn
+				+btn
+				top: 723px
+		.page.p4
+			.calendarBtn
+				+btn
+				top: 656px
+			.googleMapBtn
+				+btn
+				top: 656px
+				left: 280px
+		.page.p5
+			.imintBtn
+				+btn
+				top: 650px
+		.page.p6
+			.imintBtn
+				+btn
+				top: 650px
+				
